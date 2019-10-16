@@ -1,0 +1,11 @@
+const actions = {
+  GET_PODCAST_LIST_REQUEST: 'GET_PODCAST_LIST_REQUEST',
+  GET_PODCAST_LIST_SUCCESS: 'GET_PODCAST_LIST_SUCCESS',
+  GET_PODCAST_LIST_ERROR: 'GET_PODCAST_LIST_ERROR',
+
+  getPodcastList: () => ({
+    type: actions.GET_PODCAST_LIST_REQUEST
+  }),
+};
+
+export default actions;
