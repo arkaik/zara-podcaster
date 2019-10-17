@@ -1,11 +1,18 @@
 import { all, fork, call, put, takeEvery } from 'redux-saga/effects';
 import actions from './actions.js';
 import { getJson } from '../../utils/api.js';
+import { getContent, setContent } from '../../utils/storage.js';
+import { formatPodcastItem } from '../../utils/format.js';
 
 function* getPodcastListSaga(action) {
   try {
-    const data = yield call(getJson, 'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
-    yield put({ type: actions.GET_PODCAST_LIST_SUCCESS, payload: data.feed.entry });
+    let list = getContent('podcastList');
+    if (!list) {
+      const data = yield call(getJson, 'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
+      list = data.feed.entry.map(formatPodcastItem);
+      setContent('podcastList', list);
+    }
+    yield put({ type: actions.GET_PODCAST_LIST_SUCCESS, payload: list });
   } catch (error) {
     yield put({ type: actions.GET_PODCAST_LIST_ERROR, error });
   }

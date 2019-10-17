@@ -29,7 +29,7 @@ function Podcast () {
   return (
     <main className="podcast">
       <div className="detail">
-        <div className="center">
+        <div className="imageBox">
           <Link to={`${url}`}>
             <img src={image} alt=""/>
           </Link>

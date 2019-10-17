@@ -9,10 +9,20 @@
 .podcast .detail {
   flex: 1 1 250px;
   padding: 10px;
+  border-radius: 5px;
   box-shadow: 0 0 10px 0 #c5c5c5;
   margin: 10px 15px;
 }
 
+.podcast .imageBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.podcast .imageBox img {
+  border-radius: 5px;
+  width: 150px;
+}
 .podcast .infoBox {
   border-top: solid 1px lightgrey;
   padding-top: 10px;
@@ -38,6 +48,7 @@
 
 .episodeTable .total {
   padding: 10px;
+  border-radius: 5px;
   box-shadow: 0 0 10px 0 #c5c5c5;
 }
 
@@ -45,6 +56,7 @@
   width: 100%;
   margin-top: 15px;
   padding: 10px;
+  border-radius: 5px;
   box-shadow: 0 0 10px 0 #c5c5c5;
 }
 

@@ -1,17 +1,17 @@
-export const formatPodcast = (podcast) => {
-  const id = podcast.collectionId;
-  const name = podcast.collectionName;
-  const author = podcast.artistName;
-  const image = podcast.artworkUrl60;
-  return ({
+export const formatPodcastItem = (podcast) => {
+  const id = podcast['id']['attributes']['im:id'];
+  const name = podcast['im:name']['label'].toUpperCase();
+  const author = podcast['im:artist']['label'];
+  const image = podcast['im:image'][1]['label'];
+  return {
     id,
     name,
     author,
-    image
-  });
+    image,
+  }
 }
 
-export const formatEpisode = (episode, index, array) => {
+const formatEpisode = (episode, index, array) => {
   try {
     const id = array.length - index;
     const title = episode['itunes:title']? episode['itunes:title']['_text'] : episode.title['_text'];
@@ -35,18 +35,21 @@ export const formatEpisode = (episode, index, array) => {
   }
 }
 
-export const formatRSSContext = (context) => {
-  try {
-    const summary = context['description']?
-      (context['description']['_cdata'] || context['description']['_text'])
-      : (context['itunes:summary']['_cdata'] || context['itunes:summary']['_text']);
-    return {
-      summary
-    };
-  } catch (error) {
-    console.group('FormatRSSContext');
-    console.log(error);
-    console.log(context);
-    console.groupEnd();
-  }
+export const formatPodcast = (podcast) => {
+  const name = podcast['title']['_text'].trim();
+  const author = podcast['media:credit']? podcast['media:credit']['_text'] : podcast['itunes:author']['_text'];
+  const image = podcast['image']? podcast['image']['url']['_text'] : podcast['media:thumbnail']['attributes']['url'];
+  const imageAlt = podcast['image']? podcast['image']['title']['_text'] : name;
+  const summary = podcast['description']?
+    (podcast['description']['_cdata'] || podcast['description']['_text'])
+    : (podcast['itunes:summary']['_cdata'] || podcast['itunes:summary']['_text']);
+  const episodeList = podcast['item'].map(formatEpisode);
+  return ({
+    name,
+    author,
+    image,
+    imageAlt,
+    summary,
+    episodeList
+  });
 }

@@ -9,7 +9,6 @@ function App(props) {
         <Link to="/">Podcaster</Link>
       </header>
       <Routes />
-      <footer></footer>
     </Fragment>
   );
 }

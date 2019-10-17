@@ -10,7 +10,7 @@ function EpisodeTable(props) {
       <div className="total">Episodes: {total}</div>
       <table className="table">
         <thead>
-          <tr><th>Title</th><th>Date</th><th>Duration</th></tr>
+          <tr><th>Title</th><th>Duration</th><th>Date</th></tr>
         </thead>
         <tbody>
         {list.map(episode => (

@@ -7,6 +7,7 @@
   width: 200px;
   margin-top: 30px;
   overflow-y: visible;
+  border-radius: 5px;
   box-shadow: 0 0 10px 0 #c5c5c5;
 }
 

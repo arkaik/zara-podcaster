@@ -12,10 +12,18 @@ code {
     monospace;
 }
 
-.center {
-  text-align: center;
-}
-
 .list li {
   display: block;
+}
+
+.header {
+  padding: 10px 15px;
+  border-bottom: solid 1px lightgrey;
+}
+
+.header a {
+  font-size: 24px;
+  font-weight: bold;
+  color: steelblue;
+  text-decoration: none;
 }
