@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import actions from '../../redux/podcastList/actions.js';
 import './PodcastList.css';
@@ -10,15 +10,33 @@ const { getPodcastList } = actions;
 function PodcastList(props) {
   const dispatch = useDispatch();
 
+  const [filter, setFilter] = useState('');
+
   useEffect(() => {
     dispatch(getPodcastList());
   }, [dispatch]);
 
-  const list = useSelector(({ PodcastList }) => PodcastList.list);
+  const list = useSelector(({ PodcastList }) => PodcastList.list.filter(podcast => {
+    const inTitle = podcast.name.toLowerCase().includes(filter);
+    const inAuthor = podcast.author.toLowerCase().includes(filter);
+    return inTitle || inAuthor;
+  }));
 
   return (
     <main className="podcastList" >
-      <div className="search"></div>
+      <div className="searchRow">
+        <div className="searchBox">
+          <span className="resultNumber">{list.length}</span>
+          <input
+            className="searchInput"
+            placeholder="Filter podcasts..."
+            onInput={(ev) => {
+              const value = ev.target.value.toLowerCase();
+              setFilter(value);
+            }}
+          />
+        </div>
+      </div>
       <ul className="list">
       {list.map(podcast => (
         <PodcastItem podcast={podcast} />
