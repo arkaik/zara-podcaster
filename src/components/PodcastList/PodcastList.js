@@ -17,9 +17,9 @@ function PodcastList(props) {
   const list = useSelector(({ PodcastList }) => PodcastList.list);
 
   return (
-    <main id="PodcastList" className="content">
+    <main className="podcastList" >
       <div className="search"></div>
-      <ul>
+      <ul className="list">
       {list.map(podcast => (
         <PodcastItem podcast={podcast} />
       ))}

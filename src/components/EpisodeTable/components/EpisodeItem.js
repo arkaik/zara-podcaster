@@ -12,13 +12,19 @@ function EpisodeItem({ episode }) {
   const { url } = useRouteMatch();
 
   return (
-    <li>
-      <span>
-        <Link to={`${url}/episode/${id}`}>{title}</Link>
-      </span>
-      <span>{duration}</span>
-      <span>{date}</span>
-    </li>
+    <tr>
+      <td>
+        <span>
+          <Link to={`${url}/episode/${id}`}>{title}</Link>
+        </span>
+      </td>
+      <td>
+        <span>{duration}</span>
+      </td>
+      <td>
+        <span>{date}</span>
+      </td>
+    </tr>
   )
 }
 

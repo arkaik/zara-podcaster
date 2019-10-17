@@ -13,9 +13,9 @@ function PodcastItem({ podcast }) {
   const name = dataName.toUpperCase();
 
   return (
-    <li>
+    <li className="podcastItem">
       <Link to={`/podcast/${id}`}>
-        <img src={image} alt='Podcast item'/>
+        <div className="imageBox"><img src={image} alt='Podcast item'/></div>
         <div>{name}</div>
         <div>Author: {dataAuthor}</div>
       </Link>

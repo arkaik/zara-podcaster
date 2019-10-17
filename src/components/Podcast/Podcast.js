@@ -1,11 +1,10 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom';
+import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 import actions from '../../redux/podcast/actions.js';
 import './Podcast.css';
 
-const EpisodeList = lazy(() => import('../EpisodeList/EpisodeList.js'));
+const EpisodeTable = lazy(() => import('../EpisodeTable/EpisodeTable.js'));
 const Episode = lazy(() => import('../Episode/Episode.js'));
 
 const { getPodcast } = actions;
@@ -20,26 +19,39 @@ function Podcast () {
 
   const podcast = useSelector(({ Podcast }) => Podcast);
   const {
-    id,
     name,
     author,
     image,
+    summary,
     episodeList
   } = podcast;
 
   return (
-    <main id="podcast">
-      <div>
-        <img src={image} alt=""/>
-        <div>{name}</div>
-        <div>by {author}</div>
+    <main className="podcast">
+      <div className="detail">
+        <div className="center">
+          <Link to={`${url}`}>
+            <img src={image} alt=""/>
+          </Link>
+        </div>
+        <div className="infoBox">
+          <Link to={`${url}`}>
+            <div>{name}</div>
+          </Link>
+          <div>by {author}</div>
+        </div>
+        <div className="summaryBox">
+          <div>Description:</div>
+          <div className="summary" dangerouslySetInnerHTML={{ __html: summary }}/>
+        </div>
       </div>
 
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route path={path} exact render={(props) => <EpisodeList {...props} list={episodeList} />} />
+          <Route path={path} exact render={(props) => <EpisodeTable {...props} list={episodeList} />} />
           <Route path={`${path}/episode/:episodeId`} render={(props) => {
-            return <Episode {...props} />
+            const episode = episodeList[episodeList.length - props.match.params.episodeId] || {};
+            return <Episode {...props} episode={episode}/>
           }} />
         </Switch>
       </Suspense>

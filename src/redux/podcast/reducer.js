@@ -1,9 +1,9 @@
 import actions from './actions.js';
-import { formatPodcast, formatEpisode } from '../../utils/format.js';
+import { formatPodcast, formatEpisode, formatRSSContext } from '../../utils/format.js';
 
 const initialState = {
   episodeList: [],
-  description: 'No description available',
+  summary: 'No description available',
 };
 
 export default (state = initialState, action = {}) => {
@@ -14,7 +14,8 @@ export default (state = initialState, action = {}) => {
 
     case actions.GET_EPISODE_LIST_SUCCESS:
       const episodeList = action.payload.map(formatEpisode);
-      return { ...state, episodeList };
+      const context = formatRSSContext(action.context);
+      return { ...state, ...context, episodeList };
 
     default:
       return state;

@@ -1,11 +1,18 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
-function Episode (props) {
-  const { episodeId } = useParams();
+function Episode ({ episode }) {
+  const {
+    title,
+    description,
+    audioSrc
+  }= episode;
   return (
-    <section>
-    {episodeId}
+    <section className="episode">
+      <h3>{title}</h3>
+      <div className="description" dangerouslySetInnerHTML={{ __html: description }} />
+      <audio src={audioSrc} controls>
+        Your browser does not support the <code>audio</code> element.
+      </audio>
     </section>
   );
 }

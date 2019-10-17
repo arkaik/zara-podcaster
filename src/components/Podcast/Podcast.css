@@ -1,0 +1,62 @@
+.podcast {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Podcast detail*/
+
+.podcast .detail {
+  flex: 1 1 250px;
+  padding: 10px;
+  box-shadow: 0 0 10px 0 #c5c5c5;
+  margin: 10px 15px;
+}
+
+.podcast .infoBox {
+  border-top: solid 1px lightgrey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.podcast .summaryBox {
+  border-top: solid 1px lightgrey;
+  padding-top: 10px;
+}
+.podcast .summaryBox .summary {
+  font-style: italic;
+}
+.podcast .summaryBox .summary > p {
+  margin: 0px;
+}
+
+/* EpisodeTable */
+
+.episodeTable {
+  flex: 3 1 500px;
+  margin: 10px 15px;
+}
+
+.episodeTable .total {
+  padding: 10px;
+  box-shadow: 0 0 10px 0 #c5c5c5;
+}
+
+.episodeTable .table {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  box-shadow: 0 0 10px 0 #c5c5c5;
+}
+
+.episodeTable .table tr {
+  text-align: left;
+}
+
+/* Episode */
+
+.episode {
+  flex: 3 1 500px;
+  margin: 10px 15px;
+  padding: 10px;
+  box-shadow: 0 0 10px 0 #c5c5c5;
+}

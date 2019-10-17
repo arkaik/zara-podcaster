@@ -1,22 +1,26 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.podcastList .list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
 }
 
-.App-link {
-  color: #09d3ac;
+.podcastItem {
+  width: 200px;
+  margin-top: 30px;
+  overflow-y: visible;
+  box-shadow: 0 0 10px 0 #c5c5c5;
+}
+
+.podcastItem > a {
+  display: block;
+}
+
+.podcastItem .imageBox {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 30px;
+}
+
+.podcastItem .imageBox img {
+  border-radius: 50%;
 }
