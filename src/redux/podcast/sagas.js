@@ -1,5 +1,6 @@
 import { all, fork, call, put, takeEvery } from 'redux-saga/effects';
 import actions from './actions.js';
+import loadingActions from '../loading/actions.js';
 import { getJson, getXml } from '../../utils/api.js';
 import { getContent, setContent } from '../../utils/storage.js';
 import { formatPodcast } from '../../utils/format.js';
@@ -8,6 +9,7 @@ const CORS_PROXY = 'https://jsonp.afeld.me/?url=';
 
 function* getPodcastSaga({podcastId}) {
   try {
+    yield put(loadingActions.startLoading());
     let detail = getContent(`podcast-${podcastId}`);
     if (!detail) {
       const data = yield call(getJson, `${CORS_PROXY}https://itunes.apple.com/lookup?id=${podcastId}`);
@@ -21,8 +23,10 @@ function* getPodcastSaga({podcastId}) {
       }
     }
     yield put({ type: actions.GET_PODCAST_SUCCESS, payload: detail });
+    yield put(loadingActions.endLoading());
   } catch (error) {
     yield put({ type: actions.GET_PODCAST_ERROR, error });
+    yield put(loadingActions.endLoading());
   }
 }
 

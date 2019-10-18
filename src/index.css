@@ -17,6 +17,9 @@ code {
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 15px;
   border-bottom: solid 1px lightgrey;
 }
@@ -26,4 +29,47 @@ code {
   font-weight: bold;
   color: steelblue;
   text-decoration: none;
+}
+
+.header .loadingIndicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  animation-name: loading;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+  opacity: 0;
+  transition: opacity 250ms linear;
+}
+
+.header .loadingIndicator.active {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+@keyframes loading {
+  from {
+    background-color: green;
+  }
+
+  20% {
+    background-color: red
+  }
+
+  40% {
+    background-color: cyan;
+  }
+
+  60% {
+    background-color: blue;
+  }
+
+  80% {
+    background-color: yellow;
+  }
+
+  to {
+    background-color: green;
+  }
 }

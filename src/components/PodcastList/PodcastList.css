@@ -8,6 +8,7 @@
 }
 .podcastList .searchBox .resultNumber {
   padding: 5px;
+  margin-right: 5px;
   border-radius: 8px;
   background-color: steelblue;
   color: white;
@@ -16,13 +17,14 @@
 
 .podcastList .list {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   padding: 0px;
 }
 
 .podcastItem {
   width: 200px;
-  margin-top: 30px;
+  margin-top: 40px;
   overflow-y: visible;
   border-radius: 5px;
   box-shadow: 0 0 10px 0 #c5c5c5;
@@ -30,13 +32,15 @@
 
 .podcastItem > a {
   display: block;
+  text-decoration: none;
+  padding: 10px;
 }
 
 .podcastItem .imageBox {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 30px;
+  height: 20px;
 }
 
 .podcastItem .imageBox img {
