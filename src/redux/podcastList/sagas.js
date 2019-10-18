@@ -18,6 +18,7 @@ function* getPodcastListSaga(action) {
     yield delay(200);
     yield put(loadingActions.endLoading());
   } catch (error) {
+    console.error(error);
     yield put({ type: actions.GET_PODCAST_LIST_ERROR, error });
     yield delay(200);
     yield put(loadingActions.endLoading());

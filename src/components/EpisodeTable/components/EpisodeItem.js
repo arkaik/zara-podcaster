@@ -12,9 +12,9 @@ function EpisodeItem({ episode }) {
   const { url } = useRouteMatch();
 
   return (
-    <tr>
+    <tr className="episodeItem">
       <td>
-        <span>
+        <span className="link">
           <Link to={`${url}/episode/${id}`}>{title}</Link>
         </span>
       </td>

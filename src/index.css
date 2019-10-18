@@ -32,22 +32,17 @@ code {
 }
 
 .loadingIndicator {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   margin: 5px;
   border-radius: 50%;
+  border: dashed 2px black;
   animation-name: loading;
-  animation-duration: 4s;
+  animation-duration: 3s;
   animation-iteration-count: infinite;
   animation-play-state: paused;
   opacity: 0;
   transition: opacity 100ms linear;
-}
-
-.loadingIndicator.suspense {
-  position: absolute;
-  top: 10px;
-  right: 15px;
 }
 
 .loadingIndicator.active {
@@ -57,26 +52,32 @@ code {
 
 @keyframes loading {
   from {
-    background-color: green;
+    border-color: green;
+    transform: rotate(0deg);
   }
 
   20% {
-    background-color: red
+    border-color: red;
+    transform: rotate(72deg);
   }
 
   40% {
-    background-color: cyan;
+    border-color: cyan;
+    transform: rotate(144deg);
   }
 
   60% {
-    background-color: blue;
+    border-color: blue;
+    transform: rotate(216deg);
   }
 
   80% {
-    background-color: yellow;
+    border-color: orange;
+    transform: rotate(288deg);
   }
 
   to {
-    background-color: green;
+    border-color: green;
+    transform: rotate(360deg);
   }
 }

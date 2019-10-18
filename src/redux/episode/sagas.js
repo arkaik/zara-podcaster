@@ -1,17 +1,26 @@
-import { all, fork, put, takeEvery, select, delay } from 'redux-saga/effects';
+import { all, fork, put, takeEvery, take, select, delay } from 'redux-saga/effects';
 import actions from './actions.js';
+import podcastActions from '../podcast/actions.js';
 import loadingActions from '../loading/actions.js';
 
-function* getEpisodeSaga({ episodeId }) {
+function* getEpisodeSaga({ podcastId, episodeId }) {
   try {
     yield put(loadingActions.startLoading());
-    const list = yield select(({ Podcast }) => Podcast.episodeList);
+    let list = yield select(({ Podcast }) => Podcast.episodeList);
+    if (list.length < episodeId) {
+      yield take(podcastActions.GET_PODCAST_SUCCESS);
+      list = yield select(({ Podcast }) => Podcast.episodeList);
+    }
     const listId = list.length - episodeId;
-    const episode = list[listId] || {};
+    const episode = list[listId] || undefined;
+    if (!episode) {
+      throw new Error("The chosen episode was not found");
+    }
     yield put({ type: actions.GET_EPISODE_SUCCESS, payload: episode });
     yield delay(200);
     yield put(loadingActions.endLoading());
   } catch (error) {
+    console.error(error);
     yield put({ type: actions.GET_EPISODE_ERROR, error });
     yield delay(200);
     yield put(loadingActions.endLoading());

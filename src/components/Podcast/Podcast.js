@@ -39,13 +39,15 @@ function Podcast () {
           </Link>
         </div>
         <div className="infoBox">
-          <Link to={`${url}`}>
-            <div>{name}</div>
-          </Link>
-          <div>by {author}</div>
+          <div className="name">
+            <Link to={`${url}`}>
+              <div>{name}</div>
+            </Link>
+          </div>
+          <div className="author">by {author}</div>
         </div>
         <div className="summaryBox">
-          <div>Description:</div>
+          <div className="summaryTitle">Description:</div>
           <div className="summary" dangerouslySetInnerHTML={{ __html: summary }}/>
         </div>
       </div>

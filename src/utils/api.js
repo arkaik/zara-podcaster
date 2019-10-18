@@ -2,7 +2,7 @@ import XmlJs from 'xml-js';
 
 export const getJson = (url) => {
   return fetch(url)
-  .then(response => response.json());
+  .then(response => response.json())
 }
 
 export const getXml = (url) => {

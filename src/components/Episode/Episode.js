@@ -23,9 +23,9 @@ function Episode ({ match }) {
   } = episode;
   return (
     <section className="episode">
-      <h3>{title}</h3>
+      <h3 className="title">{title}</h3>
       <div className="description" dangerouslySetInnerHTML={{ __html: description }} />
-      <audio src={audioSrc} controls>
+      <audio className="audio" src={audioSrc} controls>
         Your browser does not support the <code>audio</code> element.
       </audio>
     </section>

@@ -7,16 +7,22 @@ function EpisodeTable({ list }) {
   return (
     <section className="episodeTable">
       <div className="total">Episodes: {total}</div>
-      <table className="table">
-        <thead>
-          <tr><th>Title</th><th>Duration</th><th>Date</th></tr>
-        </thead>
-        <tbody>
-        {list.map(episode => (
-          <EpisodeItem episode={episode} key={episode.id} />
-        ))}
-        </tbody>
-      </table>
+      <div className="tableBox">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th className="duration">Duration</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          {list.map(episode => (
+            <EpisodeItem episode={episode} key={episode.id} />
+          ))}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }

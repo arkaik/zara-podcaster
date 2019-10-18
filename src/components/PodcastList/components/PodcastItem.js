@@ -13,8 +13,8 @@ function PodcastItem({ podcast }) {
     <li className="podcastItem">
       <Link to={`/podcast/${id}`}>
         <div className="imageBox"><img src={image} alt='Podcast item'/></div>
-        <div>{name}</div>
-        <div>Author: {author}</div>
+        <div className="name">{name}</div>
+        <div className="author">Author: {author}</div>
       </Link>
     </li>
   );
