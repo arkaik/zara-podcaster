@@ -1,8 +1,7 @@
 import React from 'react';
 import EpisodeItem from './components/EpisodeItem';
 
-function EpisodeTable(props) {
-  const { list } = props;
+function EpisodeTable({ list }) {
   const total = list.length;
 
   return (

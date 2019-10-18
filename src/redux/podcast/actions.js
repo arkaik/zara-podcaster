@@ -8,6 +8,11 @@ const actions = {
     podcastId: id
   }),
 
+  CLEAN_PODCAST: 'CLEAN_PODCAST',
+
+  cleanPodcast: () => ({
+    type: actions.CLEAN_PODCAST,
+  }),
 };
 
 export default actions;

@@ -31,19 +31,26 @@ code {
   text-decoration: none;
 }
 
-.header .loadingIndicator {
+.loadingIndicator {
   width: 20px;
   height: 20px;
+  margin: 5px;
   border-radius: 50%;
   animation-name: loading;
   animation-duration: 4s;
   animation-iteration-count: infinite;
   animation-play-state: paused;
   opacity: 0;
-  transition: opacity 250ms linear;
+  transition: opacity 100ms linear;
 }
 
-.header .loadingIndicator.active {
+.loadingIndicator.suspense {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.loadingIndicator.active {
   opacity: 1;
   animation-play-state: running;
 }

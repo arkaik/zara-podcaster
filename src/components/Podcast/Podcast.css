@@ -9,9 +9,9 @@
 .podcast .detail {
   flex: 1 1 250px;
   padding: 10px;
+  margin: 10px 15px;
   border-radius: 5px;
   box-shadow: 0 0 10px 0 #c5c5c5;
-  margin: 10px 15px;
 }
 
 .podcast .imageBox {

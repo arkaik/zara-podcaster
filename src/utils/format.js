@@ -15,7 +15,7 @@ const formatEpisode = (episode, index, array) => {
   try {
     const id = array.length - index;
     const title = episode['itunes:title']? episode['itunes:title']['_text'] : episode.title['_text'];
-    const description = episode['summary']? episode['summary']['_cdata'] : episode['itunes:summary']['_cdata'];
+    const description = episode['summary']? episode['summary']['_cdata'] : (episode['itunes:summary']? episode['itunes:summary']['_cdata']: 'No description available');
     const duration = episode['itunes:duration']? episode['itunes:duration']['_text'] : 'Unknown duration';
     const date = episode['pubDate']['_text'];
     const audioSrc = episode['enclosure']? episode['enclosure']['_attributes']['url'] : episode['media:content']['_attributes']['url'];
@@ -42,7 +42,8 @@ export const formatPodcast = (podcast) => {
   const imageAlt = podcast['image']? podcast['image']['title']['_text'] : name;
   const summary = podcast['description']?
     (podcast['description']['_cdata'] || podcast['description']['_text'])
-    : (podcast['itunes:summary']['_cdata'] || podcast['itunes:summary']['_text']);
+    : (podcast['itunes:summary']? (podcast['itunes:summary']['_cdata'] || podcast['itunes:summary']['_text'])
+      : 'No summary available');
   const episodeList = podcast['item'].map(formatEpisode);
   return ({
     name,

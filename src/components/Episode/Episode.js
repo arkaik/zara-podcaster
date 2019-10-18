@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import actions from '../../redux/episode/actions.js';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Episode ({ episode }) {
+const { getEpisode, cleanEpisode } = actions;
+
+function Episode ({ match }) {
+  const id = match.params.episodeId;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getEpisode(id));
+    return () => {
+      dispatch(cleanEpisode());
+    };
+  }, [dispatch, id]);
+
+  const episode = useSelector(({ Episode }) => Episode);
   const {
     title,
     description,
     audioSrc
-  }= episode;
+  } = episode;
   return (
     <section className="episode">
       <h3>{title}</h3>

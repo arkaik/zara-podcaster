@@ -1,4 +1,4 @@
-import { all, fork, call, put, takeEvery } from 'redux-saga/effects';
+import { all, fork, call, put, takeEvery, delay } from 'redux-saga/effects';
 import actions from './actions.js';
 import loadingActions from '../loading/actions.js';
 import { getJson, getXml } from '../../utils/api.js';
@@ -22,10 +22,13 @@ function* getPodcastSaga({podcastId}) {
         throw new Error(`No podcast with id ${podcastId} found`);
       }
     }
+
     yield put({ type: actions.GET_PODCAST_SUCCESS, payload: detail });
+    yield delay(200);
     yield put(loadingActions.endLoading());
   } catch (error) {
     yield put({ type: actions.GET_PODCAST_ERROR, error });
+    yield delay(200);
     yield put(loadingActions.endLoading());
   }
 }

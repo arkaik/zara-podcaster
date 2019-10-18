@@ -1,4 +1,4 @@
-import { all, fork, call, put, takeEvery } from 'redux-saga/effects';
+import { all, fork, call, put, takeEvery, delay } from 'redux-saga/effects';
 import actions from './actions.js';
 import loadingActions from '../loading/actions.js';
 import { getJson } from '../../utils/api.js';
@@ -15,9 +15,11 @@ function* getPodcastListSaga(action) {
       setContent('podcastList', list);
     }
     yield put({ type: actions.GET_PODCAST_LIST_SUCCESS, payload: list });
+    yield delay(200);
     yield put(loadingActions.endLoading());
   } catch (error) {
     yield put({ type: actions.GET_PODCAST_LIST_ERROR, error });
+    yield delay(200);
     yield put(loadingActions.endLoading());
   }
 }

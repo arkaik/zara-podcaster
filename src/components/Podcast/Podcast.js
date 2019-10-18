@@ -1,13 +1,14 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
+import { SuspenseFallback } from '../../utils/LoadingIndicator.js'
 import actions from '../../redux/podcast/actions.js';
 import './Podcast.css';
 
 const EpisodeTable = lazy(() => import('../EpisodeTable/EpisodeTable.js'));
 const Episode = lazy(() => import('../Episode/Episode.js'));
 
-const { getPodcast } = actions;
+const { getPodcast, cleanPodcast } = actions;
 
 function Podcast () {
   const { path, url, params: { podcastId } } = useRouteMatch();
@@ -15,6 +16,9 @@ function Podcast () {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPodcast(podcastId));
+    return () => {
+      dispatch(cleanPodcast());
+    }
   }, [dispatch, podcastId]);
 
   const podcast = useSelector(({ Podcast }) => Podcast);
@@ -23,7 +27,7 @@ function Podcast () {
     author,
     image,
     summary,
-    episodeList
+    episodeList,
   } = podcast;
 
   return (
@@ -46,13 +50,10 @@ function Podcast () {
         </div>
       </div>
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<SuspenseFallback/>}>
         <Switch>
-          <Route path={path} exact render={(props) => <EpisodeTable {...props} list={episodeList} />} />
-          <Route path={`${path}/episode/:episodeId`} render={(props) => {
-            const episode = episodeList[episodeList.length - props.match.params.episodeId] || {};
-            return <Episode {...props} episode={episode}/>
-          }} />
+          <Route path={path} exact render={props => <EpisodeTable {...props} list={episodeList}/>} />
+          <Route path={`${path}/episode/:episodeId`} render={props => <Episode {...props} />} />
         </Switch>
       </Suspense>
     </main>

@@ -1,18 +1,17 @@
 import actions from './actions.js';
 
 const initialState = {
-  name: '',
-  summary: '',
-  episodeList: [],
+  title: '',
+  description: '',
 };
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case actions.GET_PODCAST_SUCCESS:
-      const podcast = action.payload;
-      return { ...state, ...podcast };
+    case actions.GET_EPISODE_SUCCESS:
+      const episode = action.payload;
+      return { ...state, ...episode };
 
-    case actions.CLEAN_PODCAST:
+    case actions.CLEAN_EPISODE:
       return initialState;
 
     default:

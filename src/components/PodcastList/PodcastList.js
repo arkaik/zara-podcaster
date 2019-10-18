@@ -39,7 +39,7 @@ function PodcastList(props) {
       </div>
       <ul className="list">
       {list.map(podcast => (
-        <PodcastItem podcast={podcast} />
+        <PodcastItem podcast={podcast} key={podcast.id}/>
       ))}
       </ul>
     </main>
