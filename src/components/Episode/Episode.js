@@ -1,34 +1,32 @@
 import React, { useEffect } from 'react';
 import actions from '../../redux/episode/actions.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import PodcastDetail from '../Podcast/components/PodcastDetail.js';
+import EpisodeDetail from './components/EpisodeDetail.js';
+import './Episode.css';
 
 const { getEpisode, cleanEpisode } = actions;
 
 function Episode ({ match }) {
-  const id = match.params.episodeId;
+  const { podcastId, episodeId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getEpisode(id));
+    dispatch(getEpisode(podcastId, episodeId));
     return () => {
       dispatch(cleanEpisode());
     };
-  }, [dispatch, id]);
+  }, [dispatch, podcastId, episodeId]);
 
+  const podcast = useSelector(({ Podcast }) => Podcast);
   const episode = useSelector(({ Episode }) => Episode);
-  const {
-    title,
-    description,
-    audioSrc
-  } = episode;
+
   return (
-    <section className="episode">
-      <h3 className="title">{title}</h3>
-      <div className="description" dangerouslySetInnerHTML={{ __html: description }} />
-      <audio className="audio" src={audioSrc} controls>
-        Your browser does not support the <code>audio</code> element.
-      </audio>
-    </section>
+    <main className="episode">
+      <PodcastDetail podcast={podcast} />
+      <EpisodeDetail episode={episode} />
+    </main>
   );
 }
 

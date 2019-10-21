@@ -1,16 +1,14 @@
-import { all, fork, put, takeEvery, take, select, delay } from 'redux-saga/effects';
+import { all, fork, put, takeEvery, call, select, delay } from 'redux-saga/effects';
 import actions from './actions.js';
+import { getPodcastSaga } from '../podcast/sagas.js';
 import podcastActions from '../podcast/actions.js';
 import loadingActions from '../loading/actions.js';
 
-function* getEpisodeSaga({ podcastId, episodeId }) {
+export function* getEpisodeSaga({ podcastId, episodeId }) {
   try {
     yield put(loadingActions.startLoading());
-    let list = yield select(({ Podcast }) => Podcast.episodeList);
-    if (list.length < episodeId) {
-      yield take(podcastActions.GET_PODCAST_SUCCESS);
-      list = yield select(({ Podcast }) => Podcast.episodeList);
-    }
+    yield call(getPodcastSaga, { podcastId });
+    const list = yield select(({ Podcast }) => Podcast.episodeList);
     const listId = list.length - episodeId;
     const episode = list[listId] || undefined;
     if (!episode) {
@@ -31,9 +29,9 @@ function* getEpisodeWatcher() {
   yield takeEvery(actions.GET_EPISODE_REQUEST, getEpisodeSaga);
 }
 
-function* cleanEpisodeSaga() {
+export function* cleanEpisodeSaga() {
   yield put(loadingActions.startLoading());
-  yield delay(200);
+  yield put(podcastActions.cleanPodcast());
   yield put(loadingActions.endLoading());
 }
 

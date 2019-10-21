@@ -1,5 +1,5 @@
 import React from 'react';
-import EpisodeItem from './components/EpisodeItem';
+import EpisodeItem from './EpisodeItem.js';
 
 function EpisodeTable({ list }) {
   const total = list.length;

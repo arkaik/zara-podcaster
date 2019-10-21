@@ -1,0 +1,33 @@
+.episode {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* EpisodeDetail */
+
+.episodeDetail {
+  flex: 3 1 500px;
+  max-width: calc(100% - 30px);
+  box-sizing: border-box;
+  margin: 10px 15px;
+  padding: 10px;
+  box-shadow: 0 0 10px 0 #c5c5c5;
+}
+
+.episodeDetail .title {
+  margin-top: 0px;
+  font-size: 24px;
+}
+.episodeDetail .description {
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.episodeDetail .description p {
+  overflow-x: scroll;
+}
+
+.episodeDetail .audio {
+  width: 100%;
+}

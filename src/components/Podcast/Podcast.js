@@ -1,17 +1,15 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
-import { SuspenseFallback } from '../../utils/LoadingIndicator.js'
+import { useParams } from 'react-router-dom';
 import actions from '../../redux/podcast/actions.js';
+import PodcastDetail from './components/PodcastDetail.js';
+import EpisodeTable from './components/EpisodeTable.js';
 import './Podcast.css';
-
-const EpisodeTable = lazy(() => import('../EpisodeTable/EpisodeTable.js'));
-const Episode = lazy(() => import('../Episode/Episode.js'));
 
 const { getPodcast, cleanPodcast } = actions;
 
 function Podcast () {
-  const { path, url, params: { podcastId } } = useRouteMatch();
+  const { podcastId } = useParams();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,42 +20,12 @@ function Podcast () {
   }, [dispatch, podcastId]);
 
   const podcast = useSelector(({ Podcast }) => Podcast);
-  const {
-    name,
-    author,
-    image,
-    summary,
-    episodeList,
-  } = podcast;
+  const { episodeList } = podcast;
 
   return (
     <main className="podcast">
-      <div className="detail">
-        <div className="imageBox">
-          <Link to={`${url}`}>
-            <img src={image} alt=""/>
-          </Link>
-        </div>
-        <div className="infoBox">
-          <div className="name">
-            <Link to={`${url}`}>
-              <div>{name}</div>
-            </Link>
-          </div>
-          <div className="author">by {author}</div>
-        </div>
-        <div className="summaryBox">
-          <div className="summaryTitle">Description:</div>
-          <div className="summary" dangerouslySetInnerHTML={{ __html: summary }}/>
-        </div>
-      </div>
-
-      <Suspense fallback={<SuspenseFallback/>}>
-        <Switch>
-          <Route path={path} exact render={props => <EpisodeTable {...props} list={episodeList}/>} />
-          <Route path={`${path}/episode/:episodeId`} render={props => <Episode {...props} />} />
-        </Switch>
-      </Suspense>
+      <PodcastDetail podcast={podcast} />
+      <EpisodeTable list={episodeList} podcastId={podcastId}/>
     </main>
   )
 }

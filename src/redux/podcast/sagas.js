@@ -8,7 +8,7 @@ import { formatPodcast } from '../../utils/format.js';
 const CORS_PROXY = 'https://jsonp.afeld.me/?url=';
 const CORS_PROXY2 = 'https://cors-anywhere.herokuapp.com/';
 
-function* getPodcastSaga({podcastId}) {
+export function* getPodcastSaga({podcastId}) {
   try {
     yield put(loadingActions.startLoading());
     let detail = getContent(`podcast-${podcastId}`);
@@ -44,8 +44,19 @@ function* getPodcastWatcher() {
   yield takeEvery(actions.GET_PODCAST_REQUEST, getPodcastSaga);
 }
 
+export function* cleanPodcastSaga() {
+  yield put(loadingActions.startLoading());
+  yield delay(200);
+  yield put(loadingActions.endLoading());
+}
+
+function* cleanPodcastWatcher() {
+  yield takeEvery(actions.CLEAN_PODCAST, cleanPodcastSaga);
+}
+
 export default function* rootSaga() {
   yield all([
     fork(getPodcastWatcher),
+    fork(cleanPodcastWatcher),
   ]);
 };

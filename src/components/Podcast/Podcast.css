@@ -4,51 +4,6 @@
   flex-wrap: wrap;
 }
 
-/* Podcast detail*/
-
-.podcast .detail {
-  flex: 1 1 250px;
-  padding: 10px;
-  margin: 10px 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px 0 #c5c5c5;
-}
-
-.podcast .imageBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.podcast .imageBox img {
-  border-radius: 5px;
-  width: 150px;
-}
-.podcast .infoBox {
-  border-top: solid 1px lightgrey;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.podcast .infoBox .name a {
-  text-decoration: none;
-  color: black;
-  font-size: 20px;
-  font-weight: bold;
-}
-.podcast .infoBox .author {
-  font-style: italic;
-}
-.podcast .summaryBox {
-  border-top: solid 1px lightgrey;
-  padding-top: 10px;
-}
-.podcast .summaryBox .summaryTitle {
-  font-weight: bold;
-}
-.podcast .summaryBox .summary {
-  font-style: italic;
-  white-space: pre-wrap;
-}
-
 /* EpisodeTable */
 
 .episodeTable {
@@ -102,32 +57,4 @@
 .episodeItem .link a {
   color: steelblue;
   text-decoration: none;
-}
-
-/* Episode */
-
-.episode {
-  flex: 3 1 500px;
-  max-width: calc(100% - 30px);
-  box-sizing: border-box;
-  margin: 10px 15px;
-  padding: 10px;
-  box-shadow: 0 0 10px 0 #c5c5c5;
-}
-
-.episode .title {
-  margin-top: 0px;
-  font-size: 24px;
-}
-.episode .description {
-  margin-bottom: 20px;
-  font-style: italic;
-}
-
-.episode .description p {
-  overflow-x: scroll;
-}
-
-.episode .audio {
-  width: 100%;
 }

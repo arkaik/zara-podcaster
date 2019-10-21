@@ -1,0 +1,44 @@
+/* PodcastDetail*/
+
+.podcastDetail {
+  flex: 1 1 250px;
+  padding: 10px;
+  margin: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 #c5c5c5;
+}
+
+.podcastDetail .imageBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.podcastDetail .imageBox img {
+  border-radius: 5px;
+  width: 150px;
+}
+.podcastDetail .infoBox {
+  border-top: solid 1px lightgrey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.podcastDetail .infoBox .name a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+.podcastDetail .infoBox .author {
+  font-style: italic;
+}
+.podcastDetail .summaryBox {
+  border-top: solid 1px lightgrey;
+  padding-top: 10px;
+}
+.podcastDetail .summaryBox .summaryTitle {
+  font-weight: bold;
+}
+.podcastDetail .summaryBox .summary {
+  font-style: italic;
+  white-space: pre-wrap;
+}

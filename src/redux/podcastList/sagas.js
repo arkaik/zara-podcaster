@@ -5,7 +5,7 @@ import { getJson } from '../../utils/api.js';
 import { getContent, setContent } from '../../utils/storage.js';
 import { formatPodcastItem } from '../../utils/format.js';
 
-function* getPodcastListSaga(action) {
+export function* getPodcastListSaga(action) {
   try {
     yield put(loadingActions.startLoading());
     let list = getContent('podcastList');

@@ -92,6 +92,7 @@ const formatEpisode = (episode, index, array) => {
 
 export const formatPodcast = (podcast, context) => {
   try {
+    const id = context['collectionId'];
     const name = (context['collectionName'] || podcast['title']['_text']).trim();
     const author = context['artistName'] || (podcast['media:credit']? podcast['media:credit']['_text'] : podcast['itunes:author']['_text']);
     const image = context['artworkUrl100'] || (podcast['media:thumbnail']?
@@ -111,6 +112,7 @@ export const formatPodcast = (podcast, context) => {
     ) || 'No summary available';
     const episodeList = podcast['item'].map(formatEpisode);
     return ({
+      id,
       name,
       author,
       image,

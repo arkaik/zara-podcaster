@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function EpisodeItem({ episode }) {
   const {
@@ -9,13 +9,13 @@ function EpisodeItem({ episode }) {
     date,
   } = episode;
 
-  const { url } = useRouteMatch();
+  const { podcastId } = useParams();
 
   return (
     <tr className="episodeItem">
       <td>
         <span className="link">
-          <Link to={`${url}/episode/${id}`}>{title}</Link>
+          <Link to={`/podcast/${podcastId}/episode/${id}`}>{title}</Link>
         </span>
       </td>
       <td>
